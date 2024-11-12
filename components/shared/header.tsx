@@ -2,7 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
-import { Button } from "../ui/button";
+import { Button } from "../ui";
+import { MessageSquare, MessageSquarePlus } from "lucide-react";
 
 interface Props {
   className?: string;
@@ -22,7 +23,15 @@ export const Header: React.FC<Props> = ({ className }) => {
         </div>
 
         <div>
-          <Button variant='outline' size='sm'>
+          <Button className='group relative' size='sm'>
+            <MessageSquare
+              size={16}
+              className='flex items-center gap-1 mr-2 transition duration-300 group-hover:opacity-0  group-hover:-translate-x-2'
+            />
+            <MessageSquarePlus
+              size={16}
+              className='absolute gap-1 left-3 transition duration-300 opacity-0 group-hover:opacity-100'
+            />
             Обратная связь
           </Button>
         </div>
