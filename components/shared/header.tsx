@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Button } from "../ui";
 import { MessageSquare, MessageSquarePlus } from "lucide-react";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -11,8 +15,8 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ className }) => {
   return (
-    <header className={cn("border border-b", className)}>
-      <Container className='flex items-center justify-between py-8 '>
+    <header className={cn("border border-b sticky top-0 z-50 bg-white shadow-lg shadow-black/10", className)}>
+      <Container className='flex items-center justify-between py-8'>
         {/* левая часть */}
         <div className='flex items-center gap-4'>
           <Image src='/logo.png' alt='logo' width={80} height={80} />
@@ -22,6 +26,21 @@ export const Header: React.FC<Props> = ({ className }) => {
           </div>
         </div>
 
+        <div>
+          <div className='flex items-center gap-2 text-primary '>
+            <Link href={""}>
+              <FacebookIcon color='inherit' fontSize='large' />
+            </Link>
+            <Link href={""}>
+              <InstagramIcon color='inherit' fontSize='large' />
+            </Link>
+            <Link href={""}>
+              <TelegramIcon color='inherit' fontSize='large' />
+            </Link>
+          </div>
+        </div>
+
+        {/* правая часть */}
         <div>
           <Button className='group relative' size='sm'>
             <MessageSquare

@@ -8,7 +8,7 @@ interface Props {
 const cats = ["Авто из Европы", "Авто из Америки", "Авто из России", "Авто из Китая"];
 const activeIndex = 0;
 
-export const Categories: React.FC<React.PropsWithChildren<Props>> = ({ className }) => {
+export const Categories: React.FC<Props> = ({ className }) => {
   return (
     <div className={cn("inline-flex gap-1 bg-gray-50 p-1 rounded-xl", className)}>
       {cats.map((cat, index) => (

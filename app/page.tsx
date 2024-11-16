@@ -2,23 +2,22 @@
 
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Categories, Container, Title } from "@/components/shared";
+import { Container, Filters, Title, TopBar } from "@/components/shared";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 import Image from "next/image";
 
 export default function Home() {
-  const plugin = React.useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   return (
     <>
       <div className='border border-b'>
-        <Container className='flex items-center justify-center mt-10 mb-10'>
-          <Carousel plugins={[plugin.current]} onMouseEnter={plugin.current.stop} onMouseLeave={plugin.current.reset}>
+        <Container className='flex items-center justify-center mt-10 mb-10 bg-red-50'>
+          <Carousel plugins={[plugin.current]}>
             <CarouselContent>
               {Array.from({ length: 4 }).map((_, index) => (
                 <CarouselItem key={index}>
                   <div>
-                    {/* <img src={`/cars/${index + 1}.jpg`} alt='car' className='w-full flex items-center justify-between' /> */}
                     <Image src={`/cars/${index + 1}.jpg`} alt='car' width={1280} height={720} />
                   </div>
                 </CarouselItem>
@@ -30,8 +29,20 @@ export default function Home() {
 
       <Container className='mt-10'>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
+      </Container>
 
-        <Categories />
+      <TopBar />
+
+      <Container className='mt-10 pb-14'>
+        <div className='flex gap-[60px]'>
+          <div className='w-[250px]'>
+            <Filters />
+          </div>
+
+          <div className='flex-1'>
+            <div className='flex flex-col gap-16'>Список автомобилей</div>
+          </div>
+        </div>
       </Container>
     </>
   );
