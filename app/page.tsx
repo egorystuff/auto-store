@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <div className='border border-b'>
-        <Container className='flex items-center justify-center mt-10 mb-10 bg-red-50'>
+        <Container className='flex items-center justify-center mt-5 mb-5'>
           <Carousel plugins={[plugin.current]}>
             <CarouselContent>
               {Array.from({ length: 4 }).map((_, index) => (
@@ -27,13 +27,13 @@ export default function Home() {
         </Container>
       </div>
 
-      <Container className='mt-10'>
+      <Container className='mt-5'>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
       </Container>
 
       <TopBar />
 
-      <Container className='mt-10 pb-14'>
+      <Container className='mt-5 pb-14'>
         <div className='flex gap-[60px]'>
           <div className='w-[250px]'>
             <Filters />
