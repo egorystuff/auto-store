@@ -2,7 +2,7 @@
 
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Container, Filters, Title, TopBar } from "@/components/shared";
+import { Container, Filters, ProductsGroupList, Title, TopBar } from "@/components/shared";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 import Image from "next/image";
 
@@ -40,7 +40,16 @@ export default function Home() {
           </div>
 
           <div className='flex-1'>
-            <div className='flex flex-col gap-16'>Список автомобилей</div>
+            <div className='flex flex-col gap-16'>
+              <ProductsGroupList
+                title='Автомобили из Америки'
+                items={[
+                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
+                  { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
+                ]}
+                categoryId={1}
+              />
+            </div>
           </div>
         </div>
       </Container>
