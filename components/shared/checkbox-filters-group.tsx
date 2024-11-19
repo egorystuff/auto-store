@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { FilterChecboxProps, FilterCheckbox } from "./filter-checkbox";
 import { Input, Skeleton } from "../ui";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface Props {
   title: string;
@@ -29,6 +30,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
   const [loading] = React.useState(false);
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -53,7 +55,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     : (defaultItems || items).slice(0, limit);
 
   return (
-    <div className={cn("", className)}>
+    <div ref={parent} className={cn("", className)}>
       <p className='font-bold mb-3'>{title}</p>
 
       {showAll && (
@@ -66,7 +68,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         </div>
       )}
 
-      <div className='flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar'>
+      <div className='flex flex-col gap-4 max-h-[300px] pr-2 overflow-auto scrollbar'>
         {list.map((item, index) => (
           <FilterCheckbox
             key={index}

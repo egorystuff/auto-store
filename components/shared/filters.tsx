@@ -20,6 +20,17 @@ const array = [
   { text: "Volkswagen", value: "7" },
   { text: "Kia", value: "8" },
   { text: "Hyundai", value: "9" },
+  { text: "Mazda", value: "10" },
+  { text: "Lexus", value: "11" },
+  { text: "Mitsubishi", value: "12" },
+  { text: "Suzuki", value: "13" },
+  { text: "Subaru", value: "14" },
+  { text: "Volvo", value: "15" },
+  { text: "Jaguar", value: "16" },
+  { text: "Land Rover", value: "17" },
+  { text: "Chrysler", value: "18" },
+  { text: "Peugeot", value: "19" },
+  { text: "Ferrari", value: "20" },
 ];
 
 export const Filters: React.FC<Props> = ({ className }) => {

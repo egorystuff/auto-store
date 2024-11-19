@@ -2,9 +2,9 @@
 
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Container, Filters, ProductsGroupList, Title, TopBar } from "@/components/shared";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 import Image from "next/image";
+import { Container, Filters, ProductsGroupList, Title } from "@/components/shared";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 
 export default function Home() {
   const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
@@ -31,7 +31,7 @@ export default function Home() {
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
       </Container>
 
-      <TopBar />
+      {/* <TopBar /> */}
 
       <Container className='mt-5 pb-14'>
         <div className='flex gap-[60px]'>
@@ -42,7 +42,25 @@ export default function Home() {
           <div className='flex-1'>
             <div className='flex flex-col gap-16'>
               <ProductsGroupList
-                title='Автомобили из Америки'
+                title='Авто из Европы'
+                items={[
+                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
+                  { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
+                  { id: 3, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/3.jpg" },
+                  { id: 4, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/4.jpg" },
+                ]}
+                categoryId={1}
+              />
+              <ProductsGroupList
+                title='Авто из Америки'
+                items={[
+                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/4.jpg" },
+                  { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
+                ]}
+                categoryId={1}
+              />
+              <ProductsGroupList
+                title='Авто из России'
                 items={[
                   { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
                   { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
