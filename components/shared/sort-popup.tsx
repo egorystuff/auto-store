@@ -11,7 +11,7 @@ export const SortPopup: React.FC<Props> = ({ className }) => {
     <div className={cn("inline-flex items-center gap-1 bg-gray-50 px-5 h-[52px] rounded-xl cursor-pointer", className)}>
       <ArrowUpDown />
       <b>Сортировка:</b>
-      <b>По умолчанию</b>
+      <b className='text-primary'> По умолчанию</b>
     </div>
   );
 };
