@@ -36,10 +36,27 @@ model User {
 // --------------------------------------------------------------------------------
 
 model Category {
-  id   Int    @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   name String @unique
 
   products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --------------------------------------------------------------------------------
+
+model CarBrand {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  products Product[]
+
+  cartItem   CartItem? @relation(fields: [cartItemId], references: [id])
+  cartItemId Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,25 +73,12 @@ model Product {
   imageUrl          String
 
   category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
+  categoryId Int
 
-  carBrands CarBrand[]
+  carBrand   CarBrand? @relation(fields: [carBrandId], references: [id])
+  carBrandId Int
+
   cartItems CartItem[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// --------------------------------------------------------------------------------
-
-model CarBrand {
-  id Int @id @default(autoincrement())
-
-  name String
-
-  products   Product[]
-  cartItem   CartItem? @relation(fields: [cartItemId], references: [id])
-  cartItemId Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
