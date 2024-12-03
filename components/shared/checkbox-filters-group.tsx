@@ -30,7 +30,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
   const [loading] = React.useState(false);
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+  const [parent] = useAutoAnimate(/* optional config */);
 
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

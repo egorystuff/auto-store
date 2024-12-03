@@ -18,13 +18,15 @@ export const Header: React.FC<Props> = ({ className }) => {
     <header className={cn("pt-4", className)}>
       <Container className='flex items-center justify-between'>
         {/* левая часть */}
-        <div className='flex items-center gap-4'>
-          <Image src='/logo.png' alt='logo' width={80} height={80} />
-          <div>
-            <h1 className='text-2xl uppercase font-black'>Auto-Store</h1>
-            <p className='text-sm text-gray-400 leading-3'>Лучший магазин автомобилей</p>
+        <Link href='/'>
+          <div className='flex items-center gap-4'>
+            <Image src='/logo.png' alt='logo' width={80} height={80} />
+            <div>
+              <h1 className='text-2xl uppercase font-black'>Auto-Store</h1>
+              <p className='text-sm text-gray-400 leading-3'>Лучший магазин автомобилей</p>
+            </div>
           </div>
-        </div>
+        </Link>
 
         <div>
           <div className='flex items-center gap-2 text-primary '>

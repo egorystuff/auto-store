@@ -8,7 +8,11 @@ interface Props {
 
 export const SortPopup: React.FC<Props> = ({ className }) => {
   return (
-    <div className={cn("inline-flex items-center gap-1 bg-gray-50 px-5 h-[52px] rounded-xl cursor-pointer", className)}>
+    <div
+      className={cn(
+        "inline-flex text-sm items-center gap-1 bg-gray-100 px-5 h-[40px] rounded-xl cursor-pointer",
+        className,
+      )}>
       <ArrowUpDown />
       <b>Сортировка:</b>
       <b className='text-primary'> По умолчанию</b>

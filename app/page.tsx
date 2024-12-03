@@ -3,7 +3,7 @@
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { Container, Filters, ProductsGroupList, Title } from "@/components/shared";
+import { Container, Filters, ProductsGroupList, SearchInput, Title } from "@/components/shared";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 
 export default function Home() {
@@ -27,8 +27,12 @@ export default function Home() {
         </Container>
       </div>
 
-      <Container className='mt-5'>
+      <Container className='mt-5 flex flex-col items-center '>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
+
+        <div className='mt-5 w-[650px]'>
+          <SearchInput />
+        </div>
       </Container>
 
       <Container className='mt-5 pb-14'>
