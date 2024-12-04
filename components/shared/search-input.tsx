@@ -21,8 +21,13 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [parent] = useAutoAnimate(/* optional config */);
 
   useDebounce(
-    () => {
-      Api.products.search(searchQuery).then((items) => setProducts(items));
+    async () => {
+      try {
+        const responce = await Api.products.search(searchQuery);
+        setProducts(responce);
+      } catch (error) {
+        console.error(error);
+      }
     },
     200,
     [searchQuery],
@@ -53,7 +58,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           {products.map((product) => (
             <Link
               className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2 hover:bg-primary/10 cursor-pointer'
-              href={`/products/${product.id}`}
+              href={`/product/${product.id}`}
               key={product.id}>
               <img className='rounded-xl' src={product.imageUrl} width={96} alt={product.name} />
 
