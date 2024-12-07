@@ -9,27 +9,31 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 interface Props {
   title: string;
   items: FilterChecboxProps[];
+  loading?: boolean;
   defaultItems: FilterChecboxProps[];
   limit?: number;
+  name?: string;
   searchInputPlaceholder?: string;
-  onChange?: (values: string[]) => void;
+  onClickCheckbox?: (id: string) => void;
   devaultValues?: string[];
+  selectedIds?: Set<string>;
   className?: string;
 }
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,
   items,
+  loading,
   defaultItems,
   limit = 5,
+  name,
   searchInputPlaceholder = "Поиск...",
-  // onChange,
-  // devaultValues,
+  onClickCheckbox,
+  selectedIds,
   className,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
-  const [loading] = React.useState(false);
   const [parent] = useAutoAnimate(/* optional config */);
 
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,9 +78,10 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
             key={index}
             text={item.text}
             value={item.value}
+            name={name}
             endAdornment={item.endAdornment}
-            checked={false}
-            onCheckedChange={(ids) => console.log(ids)}
+            checked={selectedIds?.has(item.value)}
+            onCheckedChange={() => onClickCheckbox?.(item.value)}
           />
         ))}
       </div>

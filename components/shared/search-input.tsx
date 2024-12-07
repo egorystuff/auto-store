@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { CircleX, Search } from "lucide-react";
 import { Api } from "@/services/api-client";
 import { Product } from "@prisma/client";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -55,6 +55,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
             "absolute w-full bg-white rounded-xl py-2 top-10 shadow-md transition-all duration-200 invisible opacity-0 z-50",
             focused && "visible opacity-100 top-12",
           )}>
+          {products.length === 0 && (
+            <div className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2'>
+              <span>Ничего не найдено</span>
+            </div>
+          )}
+
           {products.map((product) => (
             <Link
               className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2 hover:bg-primary/10 cursor-pointer'
@@ -68,6 +74,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
             </Link>
           ))}
         </div>
+
+        {searchQuery.length > 0 && (
+          <div className='absolute top-1/2 translate-y-[-50%] right-3 h-5 text-gray-400'>
+            <CircleX className='w-6 h-6 cursor-pointer' onClick={() => setSearchQuery("")} />
+          </div>
+        )}
       </div>
     </>
   );
