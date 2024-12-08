@@ -8,7 +8,7 @@ type CarBrandFilterProps = Pick<CarBrand, "id" | "name">;
 interface ReturnProps {
   carBrands: CarBrandFilterProps[];
   loading: boolean;
-  selectedIds: Set<string>;
+  selectedCarBrands: Set<string>;
   onAddId: (id: string) => void;
 }
 
@@ -34,5 +34,5 @@ export const useFilterCarBrands = (): ReturnProps => {
     fetchCarBrands();
   }, []);
 
-  return { carBrands, loading, selectedIds, onAddId: toggle };
+  return { carBrands, loading, selectedCarBrands: selectedIds, onAddId: toggle };
 };
