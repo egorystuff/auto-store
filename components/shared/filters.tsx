@@ -7,34 +7,12 @@ import { Title } from "./title";
 import { Input } from "../ui";
 import { RangeSlider } from "./range-slider";
 import { CheckboxFiltersGroup } from "./checkbox-filters-group";
-import { useFilterCarBrands } from "@/hooks/useFilterCarBrands";
-import { useSet } from "react-use";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   className?: string;
 }
 
-interface PriceRange {
-  priceFrom?: number;
-  priceTo?: number;
-}
-
-interface FiltersParams extends PriceRange {
-  carLocation: string;
-  selectedCarBrands: string;
-}
-
 export const Filters: React.FC<Props> = ({ className }) => {
-  const searchParams = useSearchParams() as unknown as Map<keyof FiltersParams, string>;
-  const router = useRouter();
-  const { carBrands, loading, selectedCarBrands, onAddId } = useFilterCarBrands();
-  const [prices, setPriceRange] = React.useState<PriceRange>({
-    priceFrom: Number(searchParams.get("priceFrom")) || 0,
-    priceTo: Number(searchParams.get("priceTo")) || 90000,
-  });
-  const [carLocation, { toggle: toggleCarLocation }] = useSet(new Set<string>([]));
-
   const items = carBrands.map((item) => ({ text: item.name, value: String(item.id) }));
 
   const updatePrice = (name: keyof PriceRange, value: number) => {
@@ -45,7 +23,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
     const filters = {
       ...prices,
       carLocation: Array.from(carLocation),
-      selectedCarBrands: Array.from(selectedCarBrands),
+      carBrands: Array.from(selectedCarBrands),
     };
 
     const query = qs.stringify(filters, { arrayFormat: "comma" });
