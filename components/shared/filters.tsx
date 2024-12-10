@@ -1,35 +1,28 @@
 "use client";
 
 import React from "react";
-import qs from "qs";
 import { cn } from "@/lib/utils";
 import { Title } from "./title";
 import { Input } from "../ui";
 import { RangeSlider } from "./range-slider";
 import { CheckboxFiltersGroup } from "./checkbox-filters-group";
+import { useCarBrands, useFilters, useQueryFilters } from "@/hooks";
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
+  const { carBrands, loading } = useCarBrands();
+  const filters = useFilters();
+  useQueryFilters(filters);
+
   const items = carBrands.map((item) => ({ text: item.name, value: String(item.id) }));
 
-  const updatePrice = (name: keyof PriceRange, value: number) => {
-    setPriceRange({ ...prices, [name]: value });
+  const updatePrices = (prices: number[]) => {
+    filters.setPrices("priceFrom", prices[0]);
+    filters.setPrices("priceTo", prices[1]);
   };
-
-  React.useEffect(() => {
-    const filters = {
-      ...prices,
-      carLocation: Array.from(carLocation),
-      carBrands: Array.from(selectedCarBrands),
-    };
-
-    const query = qs.stringify(filters, { arrayFormat: "comma" });
-
-    router.push(`?${query}`, { scroll: false });
-  }, [prices, carLocation, selectedCarBrands, router]);
 
   return (
     <div className={cn("", className)}>
@@ -39,8 +32,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         className='mt-5 border-y border-y-neutral-400 py-7'
         title='Локация авто'
         name='carLocation'
-        selected={carLocation}
-        onClickCheckbox={toggleCarLocation}
+        selected={filters.carLocation}
+        onClickCheckbox={filters.setCarLocation}
         limit={4}
         items={[
           { text: "Авто из Европы", value: "1" },
@@ -60,8 +53,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
             min={0}
             max={90000}
             step={100}
-            value={String(prices.priceFrom)}
-            onChange={(e) => updatePrice("priceFrom", Number(e.target.value))}
+            value={String(filters.prices.priceFrom)}
+            onChange={(e) => filters.setPrices("priceFrom", Number(e.target.value))}
           />
           <Input
             type='number'
@@ -69,8 +62,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
             min={0}
             max={90000}
             step={100}
-            value={String(prices.priceTo)}
-            onChange={(e) => updatePrice("priceTo", Number(e.target.value))}
+            value={String(filters.prices.priceTo)}
+            onChange={(e) => filters.setPrices("priceTo", Number(e.target.value))}
           />
         </div>
 
@@ -78,8 +71,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
           min={0}
           max={90000}
           step={100}
-          value={[prices.priceFrom || 0, prices.priceTo || 90000]}
-          onValueChange={(values) => setPriceRange({ priceFrom: values[0], priceTo: values[1] })}
+          value={[filters.prices.priceFrom || 0, filters.prices.priceTo || 90000]}
+          onValueChange={updatePrices}
         />
       </div>
 
@@ -91,8 +84,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         defaultItems={items.slice(0, 5)}
         items={items}
         loading={loading}
-        onClickCheckbox={onAddId}
-        selected={selectedCarBrands}
+        onClickCheckbox={filters.setCarBrands}
+        selected={filters.selectedCarBrands}
       />
     </div>
   );

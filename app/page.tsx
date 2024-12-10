@@ -5,13 +5,22 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Container, Filters, ProductsGroupList, SearchInput, Title } from "@/components/shared";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
+import { prisma } from "@/prisma/prisma-client";
 
-export default function Home() {
-  const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
+// eslint-disable-next-line @next/next/no-async-client-component
+export default async function Home() {
+  const categories = await prisma.category.findMany({
+    include: {
+      products: true,
+    },
+  });
+  console.log(categories);
+
+  // const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   return (
     <>
-      <div className='border border-b'>
+      {/* <div className='border border-b'>
         <Container className='flex items-center justify-center mt-5 mb-5'>
           <Carousel plugins={[plugin.current]}>
             <CarouselContent>
@@ -25,7 +34,7 @@ export default function Home() {
             </CarouselContent>
           </Carousel>
         </Container>
-      </div>
+      </div> */}
 
       <Container className='mt-5 flex flex-col items-center '>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
