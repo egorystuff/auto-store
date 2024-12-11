@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-async-client-component */
 "use client";
 
 import React from "react";
@@ -5,22 +6,27 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Container, Filters, ProductsGroupList, SearchInput, Title } from "@/components/shared";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
+import { useCategories } from "@/hooks";
+import { Category, Product } from "@prisma/client";
 import { prisma } from "@/prisma/prisma-client";
 
-// eslint-disable-next-line @next/next/no-async-client-component
+interface ReturnProps extends Category {
+  products: Product[];
+}
+
 export default async function Home() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
+
   const categories = await prisma.category.findMany({
     include: {
       products: true,
     },
   });
-  console.log(categories);
-
-  // const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   return (
     <>
-      {/* <div className='border border-b'>
+      <div className='border border-b'>
         <Container className='flex items-center justify-center mt-5 mb-5'>
           <Carousel plugins={[plugin.current]}>
             <CarouselContent>
@@ -34,7 +40,7 @@ export default async function Home() {
             </CarouselContent>
           </Carousel>
         </Container>
-      </div> */}
+      </div>
 
       <Container className='mt-5 flex flex-col items-center '>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
@@ -52,42 +58,34 @@ export default async function Home() {
 
           <div className='flex-1'>
             <div className='flex flex-col gap-16'>
-              <ProductsGroupList
-                title='Авто из Европы'
-                items={[
-                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
-                  { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-                  { id: 3, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/3.jpg" },
-                  { id: 4, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/4.jpg" },
-                ]}
-                categoryId={1}
-              />
-              <ProductsGroupList
-                title='Авто из Америки'
-                items={[
-                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/4.jpg" },
-                  { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-                  { id: 3, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-                  { id: 4, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-                  { id: 5, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-                ]}
-                categoryId={2}
-              />
-              <ProductsGroupList
-                title='Авто из России'
-                items={[
-                  { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
-                  { id: 6, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
-                  { id: 7, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
-                  { id: 8, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
-                  { id: 9, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/3.jpg" },
-                ]}
-                categoryId={3}
-              />
+              {categories.map(
+                (category) =>
+                  category.products.length > 0 && (
+                    <ProductsGroupList
+                      key={category.id}
+                      title={category.name}
+                      items={category.products}
+                      categoryId={category.id}
+                    />
+                  ),
+              )}
             </div>
           </div>
         </div>
       </Container>
     </>
   );
+}
+
+{
+  /* <ProductsGroupList
+  title='Авто из Европы'
+  items={[
+    { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
+    { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
+    { id: 3, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/3.jpg" },
+    { id: 4, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/4.jpg" },
+  ]}
+  categoryId={1}
+/>; */
 }
