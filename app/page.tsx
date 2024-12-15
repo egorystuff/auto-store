@@ -1,7 +1,6 @@
 import React from "react";
-import { CarouselCard, Container, Filters, ProductsGroupList, SearchInput, Title } from "@/components/shared";
+import { CarouselCard, Container, Filters, ProductsGroupList, Title, TopBar } from "@/components/shared";
 import { prisma } from "@/prisma/prisma-client";
-import { console } from "inspector";
 
 export default async function Home() {
   const categories = await prisma.category.findMany({
@@ -10,19 +9,15 @@ export default async function Home() {
     },
   });
 
-  console.log(categories);
-
   return (
     <>
       <CarouselCard />
 
       <Container className='mt-5 flex flex-col items-center '>
         <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
-
-        <div className='mt-5 w-[650px]'>
-          <SearchInput />
-        </div>
       </Container>
+
+      <TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
       <Container className='mt-5 pb-14'>
         <div className='flex gap-[60px]'>
@@ -49,17 +44,4 @@ export default async function Home() {
       </Container>
     </>
   );
-}
-
-{
-  /* <ProductsGroupList
-  title='Авто из Европы'
-  items={[
-    { id: 1, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/1.jpg" },
-    { id: 2, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/2.jpg" },
-    { id: 3, name: "Mercedes-Benz GLA", yearOfManufacture: 2022, price: 45000, imageUrl: "/cars/3.jpg" },
-    { id: 4, name: "Peugeot 508", yearOfManufacture: 2021, price: 25000, imageUrl: "/cars/4.jpg" },
-  ]}
-  categoryId={1}
-/>; */
 }

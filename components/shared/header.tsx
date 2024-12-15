@@ -8,6 +8,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import Link from "next/link";
+import { SearchInput } from "./search-input";
 
 interface Props {
   className?: string;
@@ -15,7 +16,7 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ className }) => {
   return (
-    <header className={cn("pt-4", className)}>
+    <header className={cn("items-center py-2 h-20 sticky top-0 z-50 bg-white shadow-lg shadow-black/10", className)}>
       <Container className='flex items-center justify-between'>
         {/* левая часть */}
         <Link href='/'>
@@ -27,6 +28,10 @@ export const Header: React.FC<Props> = ({ className }) => {
             </div>
           </div>
         </Link>
+
+        <div className='items-center w-[650px]'>
+          <SearchInput />
+        </div>
 
         <div>
           <div className='flex items-center gap-2 text-primary '>

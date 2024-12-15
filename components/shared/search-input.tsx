@@ -35,8 +35,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 
   return (
     <>
-      {focused && <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-50' />}
-      <div className={cn("flex rounded-xl flex-1 justify-between relative h-11", focused && "z-50", className)}>
+      {focused && <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-60' />}
+      <div className={cn("flex rounded-xl flex-1 justify-between relative h-11", focused && "z-60", className)}>
         <Search className='absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400' />
 
         <input
