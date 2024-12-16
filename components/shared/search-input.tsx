@@ -35,8 +35,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 
   return (
     <>
-      {focused && <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-60' />}
-      <div className={cn("flex rounded-xl flex-1 justify-between relative h-11", focused && "z-60", className)}>
+      {focused && <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-50' />}
+      <div className={cn("flex rounded-xl flex-1 justify-between relative h-11 ", focused && "z-50", className)}>
         <Search className='absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400' />
 
         <input
@@ -50,10 +50,9 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         />
 
         <div
-          ref={parent}
           className={cn(
-            "absolute w-full bg-white rounded-xl py-2 top-10 shadow-md transition-all duration-200 invisible opacity-0 z-50",
-            focused && "visible opacity-100 top-12",
+            "absolute w-full bg-white rounded-xl py-2 top-10 shadow-md transition-[width] duration-150 invisible opacity-0 z-50",
+            focused && "visible opacity-100 top-12 w-[650px] translate-x-[-50%] left-1/2",
           )}>
           {products.length === 0 && (
             <div className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2'>
@@ -61,18 +60,20 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
             </div>
           )}
 
-          {products.map((product) => (
-            <Link
-              className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2 hover:bg-primary/10 cursor-pointer'
-              href={`/product/${product.id}`}
-              key={product.id}>
-              <img className='rounded-xl' src={product.imageUrl} width={96} alt={product.name} />
+          <div ref={parent}>
+            {products.map((product) => (
+              <Link
+                className='grid grid-cols-4 items-center border-b last:border-0 gap-5 px-3 py-2 hover:bg-primary/10 cursor-pointer'
+                href={`/product/${product.id}`}
+                key={product.id}>
+                <img className='rounded-xl' src={product.imageUrl} width={96} alt={product.name} />
 
-              <span>{product.name}</span>
-              <span>Год: {product.yearOfManufacture}</span>
-              <span>Цена от: {product.price} $</span>
-            </Link>
-          ))}
+                <span>{product.name}</span>
+                <span>Год: {product.yearOfManufacture}</span>
+                <span>Цена от: {product.price} $</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {searchQuery.length > 0 && (

@@ -16,7 +16,7 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ className }) => {
   return (
-    <header className={cn("items-center py-2 h-20 sticky top-0 z-50 bg-white shadow-lg shadow-black/10", className)}>
+    <header className={cn("items-center py-2 h-20 sticky top-0 z-40 bg-white", className)}>
       <Container className='flex items-center justify-between'>
         {/* левая часть */}
         <Link href='/'>
@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({ className }) => {
           </div>
         </Link>
 
-        <div className='items-center w-[650px]'>
+        <div className='items-center w-[350px]'>
           <SearchInput />
         </div>
 
