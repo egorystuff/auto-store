@@ -1,20 +1,21 @@
 import React from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { Container } from "./container";
-import { Button } from "../ui";
-import { MessageSquare, MessageSquarePlus } from "lucide-react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Container } from "./container";
+import { Button } from "../ui";
+import { MessageSquare, MessageSquarePlus } from "lucide-react";
 import { SearchInput } from "./search-input";
 
 interface Props {
   className?: string;
+  search?: boolean;
 }
 
-export const Header: React.FC<Props> = ({ className }) => {
+export const Header: React.FC<Props> = ({ className, search = true }) => {
   return (
     <header className={cn("items-center py-2 h-20 sticky top-0 z-40 bg-white", className)}>
       <Container className='flex items-center justify-between'>
@@ -29,9 +30,11 @@ export const Header: React.FC<Props> = ({ className }) => {
           </div>
         </Link>
 
-        <div className='items-center w-[350px]'>
-          <SearchInput />
-        </div>
+        {search && (
+          <div className='items-center w-[350px]'>
+            <SearchInput />
+          </div>
+        )}
 
         <div>
           <div className='flex items-center gap-2 text-primary '>
