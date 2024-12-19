@@ -17,7 +17,7 @@ interface Props {
 export const ProductCard: React.FC<Props> = ({ id, name, yearOfManufacture, price, imageUrl, className }) => {
   return (
     <div className={cn("bg-secondary p-4 rounded-sm", className)}>
-      <Link href='/'>
+      <Link href={`/product/${id}`}>
         <div className='flex justify-center'>
           <Image width={1280} height={720} src={imageUrl} alt={name} />
         </div>

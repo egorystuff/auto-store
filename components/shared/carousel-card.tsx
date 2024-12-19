@@ -14,7 +14,7 @@ export const CarouselCard: React.FC<Props> = () => {
   const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   return (
-    <div className='border border-b'>
+    <div className='border-t'>
       <Container className='flex items-center justify-center mt-5 mb-5'>
         <Carousel plugins={[plugin.current]}>
           <CarouselContent>

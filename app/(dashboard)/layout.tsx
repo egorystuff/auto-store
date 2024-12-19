@@ -7,12 +7,10 @@ export const metadata = {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <main className='min-h-screen'>
-        <Header search={false} />
+    <main className='min-h-screen'>
+      <Header search={false} />
 
-        {children}
-      </main>
-    </html>
+      {children}
+    </main>
   );
 }
