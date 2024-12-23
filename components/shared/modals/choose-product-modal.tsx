@@ -3,10 +3,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "@prisma/client";
-import { Dialog } from "@/components/ui";
-import { DialogContent } from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 import { Title } from "../title";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface Props {
   product: Product;

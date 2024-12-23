@@ -24,7 +24,7 @@ export const Header: React.FC<Props> = ({ className, search = true }) => {
           <div className='flex items-center gap-4'>
             <Image src='/logo.png' alt='logo' width={80} height={80} />
             <div>
-              <h1 className='text-2xl uppercase font-black'>Auto-Store</h1>
+              <p className='text-2xl uppercase font-black'>Auto-Store</p>
               <p className='text-sm text-gray-400 leading-3'>Лучший магазин автомобилей</p>
             </div>
           </div>
