@@ -13,5 +13,6 @@ export { ProductsGroupList } from "./products-group-list";
 export { SearchInput } from "./search-input";
 export { CarouselCard } from "./carousel-card";
 export { ProductImage } from "./product-image";
+export { ProductForm } from "./product-form";
 
 export * from "./modals";

@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
-  const [focused, setFocused] = React.useState(true);
+  const [focused, setFocused] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [products, setProducts] = React.useState<Product[]>([]);
 
@@ -33,6 +33,15 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     [searchQuery],
   );
 
+  const onChangeSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+  const onKeyDownEscape = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      setFocused(false);
+      setSearchQuery("");
+      setFocused(false);
+    }
+  };
+
   return (
     <>
       {focused && <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-50' />}
@@ -45,8 +54,9 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           placeholder='Поиск авто...'
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          onKeyDown={onKeyDownEscape}
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={onChangeSearchQuery}
         />
 
         <div
