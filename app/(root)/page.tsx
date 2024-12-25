@@ -1,5 +1,5 @@
 import React from "react";
-import { CarouselCard, Container, Filters, ProductsGroupList, Title, TopBar } from "@/components/shared";
+import { CarouselCard, Container, Filters, ProductsGroupList, Title, TopBar } from "@/shared/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 
 export default async function Home() {

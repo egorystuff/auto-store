@@ -1,22 +1,26 @@
-import { prisma } from "@/prisma/prisma-client";
-import { Container, ProductImage, Title } from "@/shared/components/shared";
-import { Button } from "@/shared/components/ui";
-import { notFound } from "next/navigation";
+import React from "react";
+import { cn } from "@/shared/lib/utils";
+import { Title } from "./title";
+import { Button } from "../ui";
+import { Product } from "@prisma/client";
+import { ProductImage } from "./product-image";
+import { Container } from "./container";
 
-export default async function ProductPage({ params: { id } }: Readonly<{ params: { id: string } }>) {
-  const product = await prisma.product.findFirst({ where: { id: Number(id) } });
+interface Props {
+  product: Product;
+  className?: string;
+  onSubmit: () => void;
+  loading: boolean;
+}
 
-  if (!product) {
-    return notFound();
-  }
-
+export const ProductForm: React.FC<Props> = ({ className, product, onSubmit, loading }) => {
   return (
-    <Container className='flex flex-col my-10'>
+    <Container className={cn(className, "m-2 mt-10")}>
       <div className='flex gap-5'>
         <ProductImage className='rounded-md' imageUrl={product.imageUrl} name={product.name} />
 
         <div className='w-1/2 bg-slate-50 rounded-md p-5'>
-          <Title text={product.name} size='md' className='font-extrabold mb-1' />
+          <Title text={product.name} size='md' className='font-extrabold mb-2' />
 
           <p className='text-md text-gray-400'>Год выпуска: {product.yearOfManufacture}</p>
 
@@ -29,9 +33,11 @@ export default async function ProductPage({ params: { id } }: Readonly<{ params:
         </div>
       </div>
 
-      <div className=' w-full bottom-0 left-0 mt-8 flex justify-center'>
-        <Button className='text-base rounded-md w-64'>Найти и рассчитать стоимость</Button>
+      <div className='absolute w-full bottom-0 left-0 mb-8 flex justify-center'>
+        <Button className='text-base rounded-md w-64' loading={loading} onClick={onSubmit}>
+          Найти и рассчитать стоимость
+        </Button>
       </div>
     </Container>
   );
-}
+};
