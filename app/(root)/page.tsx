@@ -14,7 +14,7 @@ export default async function Home() {
       <CarouselCard />
 
       <Container className='mt-5 flex flex-col items-center '>
-        <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold' />
+        <Title text='Купить авто из Америки, Европы и Азии' size='lg' className='font-bold mb-5' />
       </Container>
 
       <TopBar categories={categories.filter((category) => category.products.length > 0)} />

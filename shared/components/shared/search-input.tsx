@@ -38,7 +38,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     if (e.key === "Escape") {
       setFocused(false);
       setSearchQuery("");
-      setFocused(false);
+      (document.activeElement as HTMLElement)?.blur();
     }
   };
 

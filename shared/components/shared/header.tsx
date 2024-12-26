@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({ className, search = true }) => {
       <Container className='flex items-center justify-between'>
         {/* левая часть */}
         <Link href='/'>
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center gap-4 '>
             <Image src='/logo.png' alt='logo' width={80} height={80} />
             <div>
               <p className='text-2xl uppercase font-black'>Auto-Store</p>
