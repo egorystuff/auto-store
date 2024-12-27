@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { Title } from "./title";
 import { Button } from "../ui";
 import { Product } from "@prisma/client";
 import { ProductImage } from "./product-image";
@@ -15,18 +14,16 @@ interface Props {
 
 export const ProductForm: React.FC<Props> = ({ className, product, onSubmit, loading }) => {
   return (
-    <Container className={cn(className, "m-2 mt-10")}>
-      <div className='flex gap-5'>
+    <Container className={cn(className, "")}>
+      <div className='flex gap-5 border-b bg-white shadow-lg shadow-black/10 pb-2'>
         <ProductImage className='rounded-md' imageUrl={product.imageUrl} name={product.name} />
 
         <div className='w-1/2 bg-slate-50 rounded-md p-5'>
-          <Title text={product.name} size='md' className='font-extrabold mb-2' />
+          <p className='text-md text-gray-600'>Год выпуска: {product.yearOfManufacture}</p>
 
-          <p className='text-md text-gray-400'>Год выпуска: {product.yearOfManufacture}</p>
+          <p className='text-md text-gray-600'>Цена: {product.price} $</p>
 
-          <p className='text-md text-gray-400'>Цена: {product.price} $</p>
-
-          <p className='text-md text-gray-400'>
+          <p className='text-md text-gray-600'>
             Кузов - седан. Салон - кожа, алькантара, комбинированный. Двигатели: дизель-бензин. Новые или б/у автомобили
             от официального дилера в Германии под заказ. Доставка в Беларусь на ПТО СВХ в течении 10-14 дней.
           </p>
